@@ -8,6 +8,7 @@
     background-color: grey;
     color: white;
     margin: 10px;
+    cursor: not-allowed;
 }
 
 .leave-button {
@@ -20,6 +21,7 @@
     background-color: grey;
     color: white;
     margin: 10px;
+    cursor: not-allowed;
 }
 
 label {

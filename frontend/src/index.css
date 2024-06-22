@@ -60,7 +60,6 @@ select {
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
-  color: #1a1a1a;  ;
 }
 select:hover {
   border-color: #646cff;
@@ -81,5 +80,18 @@ select:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+  select {
+    color: #1a1a1a;
+  }
+}
+
+@media (prefers-color-schema: dark){
+  :root {
+    color: #ffffff;
+    background-color: #242424;
+  }
+  select {
+    color: #ffffff;
   }
 }
