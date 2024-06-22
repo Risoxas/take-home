@@ -8,7 +8,11 @@
     background-color: grey;
     color: white;
     margin: 10px;
+    opacity: 0.75;
     cursor: not-allowed;
+}
+.join-button:disabled:hover {
+    border: none
 }
 
 .leave-button {
@@ -21,7 +25,12 @@
     background-color: grey;
     color: white;
     margin: 10px;
+    opacity: 0.75;
     cursor: not-allowed;
+}
+
+.leave-button:disabled:hover {
+    border: none
 }
 
 label {

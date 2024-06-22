@@ -21,8 +21,44 @@ communityRouter.get("/:id", async (req, res) => {
  * @returns {Array} - Array of Community objects
  */
 communityRouter.get("/", async (_, res) => {
-	const communities = await CommunityModel.find({}).lean();
-	res.send(communities);
+	try {
+		const communities = await CommunityModel.aggregate([
+				{
+						$lookup: {
+								from: 'users',
+								localField: '_id',
+								foreignField: 'community',
+								as: 'users'
+						}
+				},
+				{
+						$addFields: {
+								userCount: { $size: '$users' },
+								totalExperiencePoints: {
+										$sum: {
+												$map: {
+														input: '$users',
+														as: 'user',
+														in: { $sum: '$$user.experiencePoints.points' }
+												}
+										}
+								}
+						}
+				},
+				{
+						$sort: { totalExperiencePoints: -1 }
+				},
+				{
+					$project: {
+							users: 0
+					}
+			}
+		]).exec();
+
+		res.send(communities);
+} catch (error) {
+		res.status(500).send({ error: 'Internal Server Error' });
+}
 });
 
 export {
